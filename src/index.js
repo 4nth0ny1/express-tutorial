@@ -19,12 +19,18 @@ app.use((req, res, next) => {
 app.listen(PORT, () => console.log(`Running Express Server on Port: ${PORT}`));
 
 const groceryList = [
-  { item: "milk", quantity: 2 },
-  { item: "apples", quantity: 3 },
+  { id: 1, item: "milk", quantity: 2 },
+  { id: 2, item: "apples", quantity: 3 },
 ];
 
 app.get("/groceries", (req, res) => {
   res.send(groceryList);
+});
+
+app.get("/groceries/:item", (req, res) => {
+  const { item } = req.params;
+  const groceryItem = groceryList.find((g) => g.item === item);
+  res.send(groceryItem);
 });
 
 app.post("/groceries", (req, res) => {
