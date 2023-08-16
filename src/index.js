@@ -17,9 +17,20 @@ const groceryList = [
   { item: "apples", quantity: 3 },
 ];
 
-app.get("/groceries", (req, res) => {
-  res.send(groceryList);
-});
+app.get(
+  "/groceries",
+  (req, res, next) => {
+    console.log("Before Handling Request");
+    next();
+  },
+  (req, res, next) => {
+    res.send(groceryList);
+    next();
+  },
+  (req, res) => {
+    console.log("Finished Executing Get Request!");
+  }
+);
 
 app.post("/groceries", (req, res) => {
   // request handler
