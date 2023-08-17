@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const groceriesRoute = require("./routes/groceries");
 const marketsRoute = require("./routes/markets");
+const cookieParser = require("cookie-parser");
 dotenv.config();
 
 const app = express();
@@ -11,6 +12,7 @@ const PORT = 3001;
 // need middleware to parse the data from post request. allows us to send json to the server
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(cookieParser());
 
 // simple logging middleware
 app.use((req, res, next) => {

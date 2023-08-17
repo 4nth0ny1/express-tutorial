@@ -30,12 +30,13 @@ const groceryList = [
 
 router.get("/groceries", (req, res) => {
   res.cookie("visited", true, {
-    maxAge: 10000, // expires the cookie
+    maxAge: 60000, // expires the cookie
   });
   res.send(groceryList);
 });
 
 router.get("/groceries/:item", (req, res) => {
+  console.log(req.cookies);
   const { item } = req.params;
   const groceryItem = groceryList.find((g) => g.item === item);
   res.send(groceryItem);
